@@ -136,7 +136,7 @@ class TabModel:
         with db_connection() as conn:
             cursor = conn.cursor()
 
-            # 1. Fetch all sessions chronologically (newest first)
+            
             cursor.execute("""
                 SELECT session_id, created_at, last_active, is_active
                 FROM sessions
@@ -148,7 +148,7 @@ class TabModel:
             for s in session_rows:
                 sessions_map[s['session_id']] = []
 
-            # 2. Fetch tabs ordered by last_visited
+            
             cursor.execute("""
                 SELECT session_id, url, title, fav_icon_url, visit_count, last_visited
                 FROM tabs

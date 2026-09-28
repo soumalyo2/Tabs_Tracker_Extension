@@ -4,10 +4,10 @@
  * to the local Flask Session Rolling backend.
  */
 
-// Updated to match the Flask Blueprint URL prefix and route name
+
 const BACKEND_URL = "http://127.0.0.1:5000/api/track";
 
-// List of URL prefixes to strictly ignore (internal browser systems & non-web protocols)
+
 const IGNORED_SCHEMES = [
   "chrome://",
   "chrome-extension://",
@@ -71,12 +71,10 @@ async function sendTabTelemetry(payload) {
 
 // Global Chrome Lifecycle Event Listener
 chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
-  // Only trigger when webpage loading is completely finalized
   if (changeInfo.status !== "complete") {
     return;
   }
 
-  // Verify URL is valid and non-system
   const targetUrl = tab.url || changeInfo.url;
   if (!isValidWebUrl(targetUrl)) {
     return;
@@ -85,7 +83,7 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
   const payload = {
     url: targetUrl,
     title: tab.title || targetUrl,
-    // Updated key to match the fav_icon_url argument expected by your TabModel
+    
     fav_icon_url: tab.favIconUrl || ""
   };
 

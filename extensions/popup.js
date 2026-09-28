@@ -173,14 +173,12 @@ function renderSessions(sessionsMap) {
 
 // Event Delegation for Accordions & Dynamic Buttons
 els.container.addEventListener('click', async (e) => {
-    // Accordion Toggle
     const header = e.target.closest('.session-header');
     if (header && !e.target.closest('.btn-delete-session')) {
         const card = header.closest('.session-card');
         card.classList.toggle('open');
     }
 
-    // Individual Tab Checkbox
     if (e.target.classList.contains('tab-checkbox')) {
         const url = e.target.dataset.url;
         if (e.target.checked) selectedTabs.add(url);
@@ -188,7 +186,6 @@ els.container.addEventListener('click', async (e) => {
         updateSelectionUI();
     }
 
-    // Delete Session Button
     const deleteBtn = e.target.closest('.btn-delete-session');
     if (deleteBtn) {
         const sid = deleteBtn.dataset.sid;
@@ -219,7 +216,7 @@ function updateSelectionUI() {
     els.btnRestore.disabled = count === 0;
 }
 
-// Top Toolbar Actions
+
 els.btnRefresh.addEventListener('click', fetchSessions);
 
 els.btnNewSession.addEventListener('click', async () => {
